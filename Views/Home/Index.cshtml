@@ -8,12 +8,10 @@
     <p class="lead">Дмитрук О.Ю.</p>
 </div>
 
-<body class="align-content-center">
-    <div class="align-content-center" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-outline-info btn-lg">Згенерувати задачу</button>
-        <button type="button" class="btn btn-outline-info btn-lg">Ввести дані вручну</button>
-        <button type="button" class="btn btn-outline-info btn-lg">Переглянути ефективність</button>
-    </div>
-</body>
+<div class="align-content-center" role="group" aria-label="Basic example">
+    <button type="button" class="btn btn-outline-info btn-lg">@Html.ActionLink("Згенерувати задачу", "DataGenerated", "GeneratedProblem")</button>
+    <button type="button" class="btn btn-outline-info btn-lg">@Html.ActionLink("Ввести дані вручну", "DataSolution", "UserProblem")</button>
+    <button type="button" class="btn btn-outline-info btn-lg">Переглянути ефективність</button>
+</div>
 
 

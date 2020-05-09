@@ -5,9 +5,7 @@ using System.Threading.Tasks;
 
 namespace CourseWorkDO.Models
 {
-    public class MatrixViewModel
+    public class AnaliticsDBInitializer
     {
-        public int Dimension { get; set; }
-        public double[][] QAPData { get; set; }
     }
 }
