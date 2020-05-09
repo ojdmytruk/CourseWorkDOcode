@@ -8,6 +8,7 @@ namespace CourseWorkDO.Models
     public class DataMatrix
     {
         public int Dimension { get; set; }
-        public double[][] QAPData { get; set; }
+        public double[][] Floats { get; set; }
+        public double[][] Distances { get; set; }
     }
 }

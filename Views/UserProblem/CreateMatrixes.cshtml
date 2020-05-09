@@ -1,24 +1,13 @@
-﻿@model CourseWorkDO.Models.DataMatrix
+﻿
+@model CourseWorkDO.Models.DataMatrix
 @{
-    ViewBag.Title = "DataUser";
+    ViewBag.Title = "CreateMatrixes";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="card m-5">
-    <h3 class="card-header text-center">Введення задачі вручну</h3>
-    <div class="card-body">
-        <form class="p-a-1" action="/UserProblem/CreateMatrixes" method="post">
-            <div class="form-group">
-                <label for="Dimension"> Розмірність матриць: </label>
-                <input class="form-control" name="Dimension" />
-            </div>
-            <div class="text-center">
-                <button type="submit">Створити матриці для заповнення</button>
-            </div>
-        </form>
-    </div>
-</div>
-@*@using (Html.BeginForm())
+<h1>CreateMatrixes</h1>
+
+@using (Html.BeginForm())
 {
     <table>
         @for (int column = 0; column < Model.Distances.Length; column++)
@@ -47,5 +36,4 @@
         }
     </table>
     <button type="submit">Submit</button>
-}*@
-
+}
