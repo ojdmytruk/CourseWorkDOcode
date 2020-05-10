@@ -18,34 +18,3 @@
         </form>
     </div>
 </div>
-@*@using (Html.BeginForm())
-{
-    <table>
-        @for (int column = 0; column < Model.Distances.Length; column++)
-        {
-            <tr>
-                @for (int row = 0; row < Model.Distances[column].Length; row++)
-                {
-                    <td>@Html.EditorFor(x => Model.Distances[column][row])</td>
-                }
-            </tr>
-        }
-    </table>
-    <button type="submit">Submit</button>
-}
-@using (Html.BeginForm())
-{
-    <table>
-        @for (int column = 0; column < Model.Floats.Length; column++)
-        {
-            <tr>
-                @for (int row = 0; row < Model.Floats[column].Length; row++)
-                {
-                    <td>@Html.EditorFor(x => Model.Floats[column][row])</td>
-                }
-            </tr>
-        }
-    </table>
-    <button type="submit">Submit</button>
-}*@
-

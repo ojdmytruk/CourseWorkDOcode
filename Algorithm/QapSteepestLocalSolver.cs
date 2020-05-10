@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CourseWorkDO.Models;
 
 namespace CourseWorkDO.Algorithm
 {
     public class QapSteepestLocalSolver : QapSolver
     {
-        public QapSteepestLocalSolver(QapData data) : base(data)
+        public QapSteepestLocalSolver(DataMatrix data) : base(data)
         {
         }
 
@@ -29,7 +30,7 @@ namespace CourseWorkDO.Algorithm
                     isLocalMinimum = true;
                 }
             }
-            CheckedElems = Steps * Data.Size * (Data.Size - 1);
+            CheckedElems = Steps * Data.Dimension * (Data.Dimension - 1);
             
             return benchmark.ActualBestSolution.Solution.ToArray();
         }

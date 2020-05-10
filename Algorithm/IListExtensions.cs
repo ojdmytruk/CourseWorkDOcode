@@ -38,11 +38,6 @@ namespace CourseWorkDO.Algorithm
         }
     }
 
-    /// <summary>
-    /// Comparer for comparing two keys, handling equality as beeing greater
-    /// Use this Comparer e.g. with SortedLists or SortedDictionaries, that don't allow duplicate keys
-    /// </summary>
-    /// <typeparam name="TKey"></typeparam>
     public class DuplicateKeyComparer<TKey> : IComparer<TKey> where TKey : IComparable
     {
         #region IComparer<TKey> Members

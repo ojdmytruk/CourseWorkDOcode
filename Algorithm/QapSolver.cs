@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
+using CourseWorkDO.Models;
 
 namespace CourseWorkDO.Algorithm
 {
     public abstract class QapSolver
     {
-        public QapData Data { get; set; }
+        public DataMatrix Data { get; set; }
 
         public RandomGenerator Rnd { get; set; } = new RandomGenerator();
 
@@ -20,7 +21,7 @@ namespace CourseWorkDO.Algorithm
 
         public int Steps { get; set; }
 
-        public QapSolver(QapData data)
+        public QapSolver(DataMatrix data)
         {
             this.Data = data;
         }
@@ -31,7 +32,7 @@ namespace CourseWorkDO.Algorithm
 
         public int[] GetRandomInitSolution()
         {
-            var init = Enumerable.Range(0, Data.Size).ToArray();
+            var init = Enumerable.Range(0, Data.Dimension).ToArray();
             Rnd.Shuffle(init);
             return init;
         }
@@ -48,7 +49,7 @@ namespace CourseWorkDO.Algorithm
 
         public int[] GetGreedyInitSolution()
         {
-            int[] solution = Enumerable.Repeat(-1, Data.Size).ToArray();
+            int[] solution = Enumerable.Repeat(-1, Data.Dimension).ToArray();
             var flows = Flatten2DimArrayWithIndexes(Data.Flows).Where(x => x.Item2 != x.Item3).ToList();
             var distances = Flatten2DimArrayWithIndexes(Data.Distances).Where(x => x.Item2 != x.Item3).ToList();
 
@@ -63,14 +64,14 @@ namespace CourseWorkDO.Algorithm
             }).ToList();
 
             
-            int currMin = costs[0].Cost;
+            double currMin = costs[0].Cost;
             var candidates = costs.TakeWhile(x => x.Cost == currMin).ToList();
             var currMove = Rnd.RandomElement(candidates);
             solution[currMove.DistanceX] = currMove.FlowX;
             solution[currMove.DistanceY] = currMove.FlowY;
 
             
-            var remainingFacilities = Enumerable.Range(0, Data.Size).Where(x => x != currMove.FlowX && x != currMove.FlowY).ToList();
+            var remainingFacilities = Enumerable.Range(0, Data.Dimension).Where(x => x != currMove.FlowX && x != currMove.FlowY).ToList();
             int alreadyInserted = 2;
             while (alreadyInserted < solution.Length)
             {

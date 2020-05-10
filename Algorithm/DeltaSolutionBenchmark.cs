@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using CourseWorkDO.Models;
 
 namespace CourseWorkDO.Algorithm
 {
@@ -10,13 +11,13 @@ namespace CourseWorkDO.Algorithm
     {
         public int[,] DeltaTable { get; set; }
 
-        public QapData Data { get; set; }
+        public DataMatrix Data { get; set; }
 
         public QapSolution ActualBestSolution { get; set; }
 
         public int SwapCounter { get; set; }
 
-        public DeltaSolutionBenchmark(QapData data, QapSolution solution)
+        public DeltaSolutionBenchmark(DataMatrix data, QapSolution solution)
         {
             QapSolutionBenchmark bench = new QapSolutionBenchmark();
             ActualBestSolution = solution;

@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CourseWorkDO.Models;
 
 namespace CourseWorkDO.Algorithm
 {
     public class QapSolutionBenchmark
     {
-        public ulong RateSolution(int[] sol, QapData data)
+        public ulong RateSolution(int[] sol, DataMatrix data)
         {
             
             ulong fitness = 0;
@@ -25,7 +26,7 @@ namespace CourseWorkDO.Algorithm
             return fitness;
         }
 
-        public int RateSolutionInt(int[] sol, QapData data)
+        public int RateSolutionInt(int[] sol, DataMatrix data)
         {
             
             int fitness = 0;
@@ -43,10 +44,10 @@ namespace CourseWorkDO.Algorithm
             return fitness;
         }
 
-        public int RateSolutionIndexedFromZero(int[] sol, QapData data)
+        public double RateSolutionIndexedFromZero(int[] sol, DataMatrix data)
         {
          
-            int fitness = 0;
+            double fitness = 0;
             for (int i = 0; i < sol.Count(); ++i)
             {
                 for (int j = 0; j < sol.Count(); ++j)
@@ -65,7 +66,7 @@ namespace CourseWorkDO.Algorithm
 
 
 
-        public int RateInsert(int[] sol, QapData data, int facility, int location)
+        public int RateInsert(int[] sol, DataMatrix data, int facility, int location)
         {
             int cost = 0;
             for (int i = 0; i < sol.Length; ++i)

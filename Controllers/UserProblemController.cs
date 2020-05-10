@@ -32,9 +32,9 @@ namespace CourseWorkDO.Controllers
                 userDataMatrix.Distances = new double[userDataMatrix.Dimension][];
                 for (int i = 0; i < userDataMatrix.Dimension; i++)
                     userDataMatrix.Distances[i] = new double[userDataMatrix.Dimension];
-                userDataMatrix.Floats = new double[userDataMatrix.Dimension][];
+                userDataMatrix.Flows = new double[userDataMatrix.Dimension][];
                 for (int i = 0; i < userDataMatrix.Dimension; i++)
-                    userDataMatrix.Distances[i] = new double[userDataMatrix.Dimension];
+                    userDataMatrix.Flows[i] = new double[userDataMatrix.Dimension];
             }
             return View(userDataMatrix);
         }

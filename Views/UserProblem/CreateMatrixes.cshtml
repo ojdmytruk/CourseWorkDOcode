@@ -5,10 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>CreateMatrixes</h1>
 
 @using (Html.BeginForm())
 {
+    <h1>Матриця відстаней:</h1>
     <table>
         @for (int column = 0; column < Model.Distances.Length; column++)
         {
@@ -20,20 +20,21 @@
             </tr>
         }
     </table>
-    <button type="submit">Submit</button>
-}
-@using (Html.BeginForm())
-{
+    <h1>Матриця потоків:</h1>
     <table>
-        @for (int column = 0; column < Model.Floats.Length; column++)
+        @for (int column = 0; column < Model.Flows.Length; column++)
         {
             <tr>
-                @for (int row = 0; row < Model.Floats[column].Length; row++)
+                @for (int row = 0; row < Model.Flows[column].Length; row++)
                 {
-                    <td>@Html.EditorFor(x => Model.Floats[column][row])</td>
+                    <td>@Html.EditorFor(x => Model.Flows[column][row])</td>
                 }
             </tr>
         }
     </table>
-    <button type="submit">Submit</button>
+    <div class="text-center">
+        <button class="btn btn-outline-info btn-lg" type="submit">Розв`язати</button>
+    </div>    
 }
+
+
