@@ -1,0 +1,23 @@
+﻿@model CourseWorkDO.Models.SolutionMatrix
+@{
+    ViewBag.Title = "GreedySolutionUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>SolutionUser</h1>
+<div class="card-body">
+    <form class="p-a-1" action="/UserProblem/GreedySolutionUser" method="post">
+        <div class="form-group">
+            @using (Html.BeginForm())
+            {
+                <table>
+                    @for (int column = 0; column < Model.SolutionArray.Length; column++)
+                    {
+                        <tr>@Model.SolutionArray[column]</tr>
+                    }
+                </table>
+            }
+        </div>
+    </form>
+</div>
+

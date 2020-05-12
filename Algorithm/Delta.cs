@@ -7,19 +7,19 @@ using CourseWorkDO.Models;
 
 namespace CourseWorkDO.Algorithm
 {
-    public class DeltaSolutionBenchmark
+    public class Delta
     {
         public int[,] DeltaTable { get; set; }
 
         public DataMatrix Data { get; set; }
 
-        public QapSolution ActualBestSolution { get; set; }
+        public SolutionMatrix ActualBestSolution { get; set; }
 
         public int SwapCounter { get; set; }
 
-        public DeltaSolutionBenchmark(DataMatrix data, QapSolution solution)
+        public Delta(DataMatrix data, SolutionMatrix solution)
         {
-            QapSolutionBenchmark bench = new QapSolutionBenchmark();
+            BetterSolutiou bench = new BetterSolutiou();
             ActualBestSolution = solution;
             Data = data;
             SwapCounter = 0;

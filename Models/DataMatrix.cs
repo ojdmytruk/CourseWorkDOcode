@@ -10,5 +10,6 @@ namespace CourseWorkDO.Models
         public int Dimension { get; set; }
         public int[][] Flows { get; set; }
         public int[][] Distances { get; set; }
+    
     }
 }

@@ -11,12 +11,12 @@
             border-spacing: 0;
             width: 100%;
             border: 1px solid #ddd;
-            background: background.png;
+            background: url(https://img.freepik.com/free-photo/_13756-53.jpg?size=626&ext=jpg)
         }
 
         th, td {
             text-align: left;
-            padding: 8px;
+            padding: 16px;
         }
 
         input[type=submit]:hover {
@@ -24,7 +24,7 @@
         }
 
         body {
-            background-image: url(background.png);
+            background: url("/Shared/background.jpg")
         }
 
         form {
@@ -41,10 +41,6 @@
 
         div[class="jumbotron"] {
             background: url(https://img.freepik.com/free-photo/_13756-53.jpg?size=626&ext=jpg)
-        }
-
-        div[class="align-content-center"] {
-            align-items:center;
         }
 
         h3[class="card-header text-center"] {
@@ -76,9 +72,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Управління студентами", "ShowStudent", "Student")</li>
-                    <li>@Html.ActionLink("Управління предметами", "ShowSubject", "Subject")</li>
-                    <li>@Html.ActionLink("Управління групами", "ShowGroups", "Group")</li>
+                    <li>@Html.ActionLink("На головну", "Index", "Home")</li>
                 </ul>
             </div>
         </div>

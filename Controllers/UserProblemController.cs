@@ -3,116 +3,47 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CourseWorkDO.Models;
+using CourseWorkDO.Algorithm;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+
 
 namespace CourseWorkDO.Controllers
 {
     public class UserProblemController : Controller
     {
-        // GET: UserProblem
+        
         public ActionResult DataUser()
         {
             return View();
         }
 
-        [HttpGet]
-        public ActionResult CreateMatrixes()
+        [HttpPost]
+        public ActionResult CreateMatrixes(DataMatrix problem)
         {
-            DataMatrix userDataMatrix = new DataMatrix();
-            
-            return View(userDataMatrix);
+            if (problem.Dimension != 0)
+            {
+                problem.Distances = new int[problem.Dimension][];
+                for (int i = 0; i < problem.Dimension; i++)
+                    problem.Distances[i] = new int[problem.Dimension];
+                problem.Flows = new int[problem.Dimension][];
+                for (int i = 0; i < problem.Dimension; i++)
+                    problem.Flows[i] = new int[problem.Dimension];
+            }
+            return View(problem);
+           
         }
 
         [HttpPost]
-        public ActionResult CreateMatrixes(DataMatrix userDataMatrix)
+        public ActionResult GreedySolutionUser(DataMatrix problem)
         {
-            if (userDataMatrix.Dimension != 0)
-            {
-                userDataMatrix.Distances = new double[userDataMatrix.Dimension][];
-                for (int i = 0; i < userDataMatrix.Dimension; i++)
-                    userDataMatrix.Distances[i] = new double[userDataMatrix.Dimension];
-                userDataMatrix.Flows = new double[userDataMatrix.Dimension][];
-                for (int i = 0; i < userDataMatrix.Dimension; i++)
-                    userDataMatrix.Flows[i] = new double[userDataMatrix.Dimension];
-            }
-            return View(userDataMatrix);
+            SolutionMatrix solution = new SolutionMatrix();
+            solution.SolutionArray = new int[problem.Dimension];
+            var greedySolver = new GreedySolver(problem);
+            solution.SolutionArray = greedySolver.GetSolution();
+            return View(solution);
+
         }
 
-
-        // GET: UserProblem/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: UserProblem/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: UserProblem/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: UserProblem/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: UserProblem/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: UserProblem/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: UserProblem/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

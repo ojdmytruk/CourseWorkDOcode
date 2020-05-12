@@ -6,9 +6,9 @@ using CourseWorkDO.Models;
 
 namespace CourseWorkDO.Algorithm
 {
-    public class QapSimpleGreedySolver : QapSolver
+    public class GreedySolver : QapSolver
     {
-        public QapSimpleGreedySolver(DataMatrix data) : base(data)
+        public GreedySolver(DataMatrix data) : base(data)
         {
         }
 
