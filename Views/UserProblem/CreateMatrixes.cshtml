@@ -7,7 +7,7 @@
     <div class="card m-5">
         <h3 class="card-header text-center">Жадібний розв'язок</h3>
         <div class="card-body">
-            <form class="p-a-1" action="/UserProblem/GreedySolutionUser" method="post">
+            <form class="p-a-1" action="/UserProblem/CreateMatrixes" method="post">
                 <div class="form-group">
                     <h1>Матриця відстаней:</h1>
                     <table>
@@ -34,9 +34,11 @@
                         }
                     </table>
                 </div>
-                <div class="text-center">
-                    <button type="submit">Розв'язати</button>
-                </div>
+                @Html.HiddenFor(m => m.Dimension);
+            <div class="text-center">
+                <input type="submit" asp-route-myMethod="Greedy" value="Жадібний алгоритм" />
+                <input type="submit" asp-route-myMethod="Steepest" value="Метод вектора спаду" />
+            </div>
             </form>
         </div>
     </div>

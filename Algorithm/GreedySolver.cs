@@ -51,11 +51,11 @@ namespace CourseWorkDO.Algorithm
                 int minPos = 0;
                 for (int i = 0; i < dimension_; ++i)
                 {
-                    if (distancesPotential_[i] < distancesPotential_[maxPos])
+                    if (distancesPotential_[i] > distancesPotential_[maxPos])
                     {
                         maxPos = i;
                     }
-                    if (flowPotential_[i] > flowPotential_[minPos])
+                    if (flowPotential_[i] < flowPotential_[minPos])
                     {
                         minPos = i;
                     }
