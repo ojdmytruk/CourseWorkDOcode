@@ -1,13 +1,12 @@
-﻿
-@model CourseWorkDO.Models.DataMatrix
+﻿@model CourseWorkDO.Models.DataMatrix
 @{
-    ViewBag.Title = "CreateMatrixes";
+    ViewBag.Title = "MatrixUser";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
     <div class="card m-5">
-        <h3 class="card-header text-center">Жадібний розв'язок</h3>
+        <h3 class="card-header text-center">Заповнення матриці</h3>
         <div class="card-body">
-            <form class="p-a-1" action="/UserProblem/CreateMatrixes" method="post">
+            <form class="p-a-1" action="/UserProblem/MatrixUser" method="post">
                 <div class="form-group">
                     <h1>Матриця відстаней:</h1>
                     <table>

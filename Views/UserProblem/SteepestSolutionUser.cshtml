@@ -10,12 +10,35 @@
         <div class="form-group">
             @using (Html.BeginForm())
             {
-                <table>
+            <table>
+                <tr>
+                    <td>
+                        <h1>Номер місця призначення</h1>
+                    </td>
                     @for (int column = 0; column < Model.SolutionArray.Length; column++)
                     {
-                        <tr>@Model.SolutionArray[column]</tr>
+                        <td><h1>@(column+1)</h1></td>
                     }
-                </table>
+                </tr>
+                <tr>
+                    <td>
+                        <h1>Номер об'єкта</h1>
+                    </td>
+                    @for (int column = 0; column < Model.SolutionArray.Length; column++)
+                    {
+                        <td>@(Model.SolutionArray[column]+1)</td>
+                    }
+                </tr>
+                <tr></tr>
+                <tr>
+                    <td>
+                        <h1>Значення цільової функції</h1>
+                    </td>
+                    <td>
+                        @Model.Score
+                    </td>
+                </tr>
+            </table>
             }
         </div>
     </form>

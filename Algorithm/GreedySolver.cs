@@ -12,7 +12,7 @@ namespace CourseWorkDO.Algorithm
         {
         }
 
-        public override int[] GetSolution()
+        public override int[] GetSolution(int score)
         {
             int dimension_ = this.Data.Dimension;
             var distancesPotential_ = new List<int>();

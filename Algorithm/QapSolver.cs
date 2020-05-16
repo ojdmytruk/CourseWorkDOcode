@@ -26,7 +26,7 @@ namespace CourseWorkDO.Algorithm
             this.Data = data;
         }
 
-        public abstract int[] GetSolution();
+        public abstract int[] GetSolution(int score);
 
         public abstract int GetSwapCounter();
 

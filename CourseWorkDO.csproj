@@ -13,4 +13,8 @@
     <WCFMetadata Include="Connected Services" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\FileProblem\" />
+  </ItemGroup>
+
 </Project>

@@ -26,12 +26,13 @@ namespace CourseWorkDO.Controllers
             DataMatrix matrix = new DataMatrix()
             { Dimension = dataMatrix.Dimension };
 
-            return RedirectToAction("CreateMatrixes", matrix);
+            return RedirectToAction("MatrixUser", matrix);
 
 
         }
+
         [HttpGet]
-        public ActionResult CreateMatrixes(DataMatrix problem)
+        public ActionResult MatrixUser(DataMatrix problem)
         {
             if (problem.Dimension != 0)
             {
@@ -49,35 +50,34 @@ namespace CourseWorkDO.Controllers
                 Distances = problem.Distances,
                 Flows = problem.Flows
             };
-            return View("CreateMatrixes", problemResult);
+
+            return View("MatrixUser", problemResult);
 
         }
 
         [HttpPost]
-        public ActionResult CreateMatrixes(DataMatrix problem2, [FromQuery] string myMethod = null)
+        public ActionResult MatrixUser(DataMatrix problem2, [FromQuery] string myMethod = null)
         {
             var problem = problem2;
 
             if (myMethod == "Greedy")
             {
-
-
+                int score = 0;
                 SolutionMatrix solution = new SolutionMatrix();
                 solution.SolutionArray = new int[problem.Flows.Count()];
                 var greedySolver = new GreedySolver(problem);
-                solution.SolutionArray = greedySolver.GetSolution();
-
+                solution.SolutionArray = greedySolver.GetSolution(score);
+                solution.Score = score;
                 return RedirectToAction("GreedySolutionUser", solution);
             }
             else if (myMethod == "Steepest")
             {
-
-
+                int score = 0;
                 SolutionMatrix solution = new SolutionMatrix();
                 solution.SolutionArray = new int[problem.Flows.Count()];
                 var greedySolver = new SteepestSolver(problem);
-                solution.SolutionArray = greedySolver.GetSolution();
-
+                solution.SolutionArray = greedySolver.GetSolution(score);
+                solution.Score = score;
                 return RedirectToAction("SteepestSolutionUser", solution);
             }
             else
@@ -85,7 +85,6 @@ namespace CourseWorkDO.Controllers
 
 
         }
-
 
 
         [HttpGet]
