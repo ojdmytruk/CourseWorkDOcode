@@ -62,22 +62,19 @@ namespace CourseWorkDO.Controllers
 
             if (myMethod == "Greedy")
             {
-                int score = 0;
                 SolutionMatrix solution = new SolutionMatrix();
                 solution.SolutionArray = new int[problem.Flows.Count()];
                 var greedySolver = new GreedySolver(problem);
-                solution.SolutionArray = greedySolver.GetSolution(score);
-                solution.Score = score;
+                solution = greedySolver.GetSolution();
                 return RedirectToAction("GreedySolutionUser", solution);
             }
             else if (myMethod == "Steepest")
             {
-                int score = 0;
                 SolutionMatrix solution = new SolutionMatrix();
                 solution.SolutionArray = new int[problem.Flows.Count()];
-                var greedySolver = new SteepestSolver(problem);
-                solution.SolutionArray = greedySolver.GetSolution(score);
-                solution.Score = score;
+                var steepestSolver = new SteepestSolver(problem);
+                solution.SolutionArray = steepestSolver.GetSolution().SolutionArray;
+                solution.Score = steepestSolver.GetSolution().Score;
                 return RedirectToAction("SteepestSolutionUser", solution);
             }
             else

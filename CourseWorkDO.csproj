@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\FileProblem\" />
+    <Folder Include="UploadedFiles\" />
   </ItemGroup>
 
 </Project>

@@ -1,37 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using CourseWorkDO.Models;
-using CourseWorkDO.Algorithm;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using CourseWorkDO.Models;
+using CourseWorkDO.Algorithm;
 
 namespace CourseWorkDO.Controllers
 {
-    public class GeneratedProblemController : Controller
+    public class FileProblemController : Controller
     {
         [HttpGet]
-        public ActionResult DataGenerated()
+        public ActionResult DataFile()
         {
             DataMatrix dataMatrix = new DataMatrix();
             return View(dataMatrix);
         }
 
         [HttpPost]
-        public ActionResult DataGenerated(DataMatrix dataMatrix)
+        public ActionResult DataFile(DataMatrix dataMatrix)
         {
             DataMatrix matrix = new DataMatrix()
             { Dimension = dataMatrix.Dimension };
 
-            return RedirectToAction("MatrixGenerated", matrix);
+            return RedirectToAction("MatrixFile", matrix);
 
 
         }
 
         [HttpGet]
-        public ActionResult MatrixGenerated(DataMatrix problem)
+        public ActionResult MatrixFile(DataMatrix problem)
         {
+            //var problem = new DataMatrix();
+            var dataReader = new DataReader();
+            var filePath = Path.GetTempFileName().Trim();
+            problem = dataReader.ReadData(filePath);
             if (problem.Dimension != 0)
             {
                 problem.Distances = new int[problem.Dimension][];
@@ -40,38 +45,6 @@ namespace CourseWorkDO.Controllers
                 problem.Flows = new int[problem.Dimension][];
                 for (int i = 0; i < problem.Dimension; i++)
                     problem.Flows[i] = new int[problem.Dimension];
-                for (int i = 0; i < problem.Dimension; i++)
-                    for (int j = 0; j < problem.Dimension; j++)
-                    {
-                        Random random = new Random();
-                        int value = random.Next(1, 99);
-                        if (i==j)
-                        {
-                            problem.Distances[i][j] = 0;
-                        }
-                        else
-                        {
-                            problem.Distances[i][j] = value;
-                            problem.Distances[j][i] = value;
-                        }
-
-                    }
-                for (int i = 0; i < problem.Dimension; i++)
-                    for (int j = 0; j < problem.Dimension; j++)
-                    {
-                        Random random = new Random();
-                        int value = random.Next(1, 99);
-                        if (i == j)
-                        {
-                            problem.Flows[i][j] = 0;
-                        }
-                        else
-                        {
-                            problem.Flows[i][j] = value;
-                            problem.Flows[j][i] = value;
-                        }
-
-                    }
             }
 
             var problemResult = new DataMatrix()
@@ -81,24 +54,22 @@ namespace CourseWorkDO.Controllers
                 Flows = problem.Flows
             };
 
-            return View("MatrixGenerated", problemResult);
+            return View("MatrixFile", problemResult);
 
         }
 
         [HttpPost]
-        public ActionResult MatrixGenerated(DataMatrix problem2, [FromQuery] string myMethod = null)
+        public ActionResult MatrixFile(DataMatrix problem2, [FromQuery] string myMethod = null)
         {
             var problem = problem2;
 
             if (myMethod == "Greedy")
             {
-                //int score = 0;
                 SolutionMatrix solution = new SolutionMatrix();
                 solution.SolutionArray = new int[problem.Flows.Count()];
                 var greedySolver = new GreedySolver(problem);
                 solution = greedySolver.GetSolution();
-                //solution.Score = score;
-                return RedirectToAction("GreedySolutionGenerated", solution);
+                return RedirectToAction("GreedySolutionFile", solution);
             }
             else if (myMethod == "Steepest")
             {
@@ -107,26 +78,46 @@ namespace CourseWorkDO.Controllers
                 var steepestSolver = new SteepestSolver(problem);
                 solution.SolutionArray = steepestSolver.GetSolution().SolutionArray;
                 solution.Score = steepestSolver.GetSolution().Score;
-                return RedirectToAction("SteepestSolutionGenerated", solution);
+                return RedirectToAction("SteepestSolutionFile", solution);
             }
             else
                 return View(problem);
         }
 
+        //[HttpPost("FileUpload")]
+        //public async Task<IActionResult> Index(List<IFormFile> files)
+        //{
+        //    long size = files.Sum(f => f.Length);
+
+        //    var filePaths = new List<string>();
+        //    foreach (var formFile in files)
+        //    {
+        //        if (formFile.Length > 0)
+        //        {
+        //            var filePath = Path.GetTempFileName(); 
+        //            filePaths.Add(filePath);
+
+        //            using (var stream = new FileStream(filePath, FileMode.Create))
+        //            {
+        //                await formFile.CopyToAsync(stream);
+        //            }
+        //        }
+        //    }
+
+        //    return Ok(new { count = files.Count, size, filePaths });
+        //}
 
         [HttpGet]
-        public ActionResult GreedySolutionGenerated(SolutionMatrix solution)
+        public ActionResult GreedySolutionFile(SolutionMatrix solution)
         {
             return View(solution);
 
         }
 
         [HttpGet]
-        public ActionResult SteepestSolutionGenerated(SolutionMatrix solution)
+        public ActionResult SteepestSolutionFile(SolutionMatrix solution)
         {
             return View(solution);
         }
-
-
     }
 }

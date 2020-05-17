@@ -9,14 +9,6 @@ namespace CourseWorkDO.Algorithm
     {
         public Random Rnd { get; set; } = new Random();
 
-        public void Shuffle<T>(IList<T> toShuffle)
-        {
-            for (int i = toShuffle.Count - 1; i >= 0; --i)
-            {
-                var j = Rnd.Next(0, i);
-                toShuffle.Swap(i, j);
-            }
-        }
 
         public void Shuffle<T>(T[] toShuffle)
         {
@@ -34,9 +26,5 @@ namespace CourseWorkDO.Algorithm
             return elems[Rnd.Next(0, elems.Count)];
         }
 
-        public int RandomNumber(int begin, int end)
-        {
-            return Rnd.Next(begin, end);
-        }
     }
 }

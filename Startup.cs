@@ -28,6 +28,7 @@ namespace CourseWorkDO
             string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<AnaliticsContext>(options => options.UseSqlServer(connection));
             services.AddControllersWithViews();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

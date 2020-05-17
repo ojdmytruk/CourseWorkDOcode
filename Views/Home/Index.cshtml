@@ -1,17 +1,23 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-
-<div class="jumbotron">
+<body>
+    <div class="jumbotron">
     <h1>Квадратична задача про призначення </h1>
     <p class="lead">Виконала: студентка групи ІС-71</p>
     <p class="lead">Дмитрук О.Ю.</p>
 </div>
 
-<div class="text-center" role="group">
-    <button type="button" class="btn btn-outline-info btn-lg">@Html.ActionLink("Згенерувати задачу", "DataGenerated", "GeneratedProblem")</button>
-    <button type="button" class="btn btn-outline-info btn-lg">@Html.ActionLink("Ввести дані вручну", "DataUser", "UserProblem")</button>
-    <button type="button" class="btn btn-outline-info btn-lg">Переглянути ефективність</button>
-</div>
+    <div class="text-center" role="group">
+        <button type="button" class="btn btn-outline-info btn-lg">@Html.ActionLink("Згенерувати задачу", "DataGenerated", "GeneratedProblem")</button>
+        <button type="button" class="btn btn-outline-info btn-lg">@Html.ActionLink("Ввести дані вручну", "DataUser", "UserProblem")</button>
+        <button type="button" class="btn btn-outline-info btn-lg">@Html.ActionLink("Зчитати дані з файлу", "DataFile", "FileProblem")</button>
+        
+    </div>
+    <div class="text-center" role="group">
+        <button type="button" class="btn btn-outline-info btn-lg">Переглянути ефективність</button>
+    </div>
+</body>
+
 
 

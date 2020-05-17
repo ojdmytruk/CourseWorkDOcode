@@ -3,43 +3,46 @@
     ViewBag.Title = "SteepestSolutionUser";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h1>SteepestSolutionUser</h1>
 
-<div class="card-body">
-    <form class="p-a-1" action="/UserProblem/SteepestSolutionUser" method="post">
-        <div class="form-group">
-            @using (Html.BeginForm())
-            {
-            <table>
-                <tr>
-                    <td>
-                        <h1>Номер місця призначення</h1>
-                    </td>
-                    @for (int column = 0; column < Model.SolutionArray.Length; column++)
+    <body>
+        <h1>SteepestSolutionUser</h1>
+
+        <div class="card-body">
+            <form class="p-a-1" action="/UserProblem/SteepestSolutionUser" method="post">
+                <div class="form-group">
+                    @using (Html.BeginForm())
                     {
-                        <td><h1>@(column+1)</h1></td>
+                        <table>
+                            <tr>
+                                <td>
+                                    <h1>Номер місця призначення</h1>
+                                </td>
+                                @for (int column = 0; column < Model.SolutionArray.Length; column++)
+                                {
+                                    <td><h1>@(column+1)</h1></td>
+                                }
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h1>Номер об'єкта</h1>
+                                </td>
+                                @for (int column = 0; column < Model.SolutionArray.Length; column++)
+                                {
+                                    <td>@(Model.SolutionArray[column]+1)</td>
+                                }
+                            </tr>
+                            <tr></tr>
+                            <tr>
+                                <td>
+                                    <h1>Значення цільової функції</h1>
+                                </td>
+                                <td>
+                                    @Model.Score
+                                </td>
+                            </tr>
+                        </table>
                     }
-                </tr>
-                <tr>
-                    <td>
-                        <h1>Номер об'єкта</h1>
-                    </td>
-                    @for (int column = 0; column < Model.SolutionArray.Length; column++)
-                    {
-                        <td>@(Model.SolutionArray[column]+1)</td>
-                    }
-                </tr>
-                <tr></tr>
-                <tr>
-                    <td>
-                        <h1>Значення цільової функції</h1>
-                    </td>
-                    <td>
-                        @Model.Score
-                    </td>
-                </tr>
-            </table>
-            }
+                </div>
+            </form>
         </div>
-    </form>
-</div>
+    </body>

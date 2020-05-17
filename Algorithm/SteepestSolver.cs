@@ -12,7 +12,7 @@ namespace CourseWorkDO.Algorithm
         {
         }
 
-        public override int[] GetSolution(int score)
+        public override SolutionMatrix/*[]*/ GetSolution(/*int score*/)
         {
             SolutionMatrix solution = new SolutionMatrix
             {
@@ -25,14 +25,20 @@ namespace CourseWorkDO.Algorithm
             bool isLocalMinimum = false;
             while (!isLocalMinimum)
             {
-                if (!CheckBestNeighbor(benchmark, score))
+                if (!CheckBestNeighbor(benchmark))
                 {
                     isLocalMinimum = true;
                 }
             }
             CheckedElems = Steps * Data.Dimension * (Data.Dimension - 1);
-            
-            return benchmark.ActualBestSolution.Solution.ToArray();
+            int score = 0;
+            for (int i = 1; i < solution.Solution.ToArray().Length; i++)
+            {
+                score += Data.Distances[solution.Solution.ToArray()[i - 1]][solution.Solution.ToArray()[i]] * Data.Flows[i - 1][i];
+            }
+            solution.Score = score;
+            solution.SolutionArray = benchmark.ActualBestSolution.Solution.ToArray();
+            return solution;
         }
 
         public override int GetSwapCounter()
@@ -40,7 +46,7 @@ namespace CourseWorkDO.Algorithm
             throw new NotImplementedException();
         }
 
-        private bool CheckBestNeighbor(Delta benchmark, int score)
+        private bool CheckBestNeighbor(Delta benchmark)
         {
             int bestI = -1;
             int bestJ = -1;
@@ -60,7 +66,6 @@ namespace CourseWorkDO.Algorithm
                 }
             }
             Steps++;
-            score = bestScore;
             if (bestJ == -1 || bestI == -1)
             {
                 return false;

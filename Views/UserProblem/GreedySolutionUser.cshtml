@@ -3,46 +3,48 @@
     ViewBag.Title = "GreedySolutionUser";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+    <body>
+        <h2>Жадібний розв'язок задачі</h2>
+        <div class="card-body">
+            <form class="p-a-1" action="/UserProblem/GreedySolutionUser" method="post">
+                <div class="form-group">
+                    @using (Html.BeginForm())
+                    {
+                        <table>
+                            <tr>
+                                <td>
+                                    <h3>Номер місця призначення</h3>
+                                </td>
+                                @for (int column = 0; column < Model.SolutionArray.Length; column++)
+                                {
+                                    <td><h3>@(column+1)</h3></td>
+                                }
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h1>Номер об'єкта</h1>
+                                </td>
+                                @for (int column = 0; column < Model.SolutionArray.Length; column++)
+                                {
+                                    <td>@(Model.SolutionArray[column]+1)</td>
+                                }
+                            </tr>
+                            <tr></tr>
+                            <tr>
+                                <td>
+                                    <h3>Значення цільової функції</h3>
+                                </td>
+                                <td>
+                                    @Model.Score
+                                </td>
+                            </tr>
 
-<h2>Жадібний розв'язок задачі</h2>
-<div class="card-body">
-    <form class="p-a-1" action="/UserProblem/GreedySolutionUser" method="post">
-        <div class="form-group">
-            @using (Html.BeginForm())
-            {
-                <table>
-                    <tr>
-                        <td>
-                            <h3>Номер місця призначення</h3>
-                        </td>
-                        @for (int column = 0; column < Model.SolutionArray.Length; column++)
-                        {
-                            <td><h3>@(column+1)</h3></td>
-                        }
-                    </tr>                    
-                    <tr>
-                        <td>
-                            <h1>Номер об'єкта</h1>
-                        </td>
-                        @for (int column = 0; column < Model.SolutionArray.Length; column++)
-                        {
-                            <td>@(Model.SolutionArray[column]+1)</td>
-                        }
-                    </tr>
-                    <tr></tr>
-                    <tr>
-                        <td>
-                            <h3>Значення цільової функції</h3>
-                        </td>
-                        <td>
-                            @Model.Score
-                        </td>
-                    </tr>
-                    
-                </table>
-            }
+                        </table>
+                    }
+                </div>
+
+            </form>
         </div>
-        
-    </form>
-</div>
+    </body>
+
 

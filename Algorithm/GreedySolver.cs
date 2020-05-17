@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CourseWorkDO.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CourseWorkDO.Algorithm
 {
@@ -12,8 +13,9 @@ namespace CourseWorkDO.Algorithm
         {
         }
 
-        public override int[] GetSolution(int score)
+        public override SolutionMatrix GetSolution()
         {
+            var solutionMatrix = new SolutionMatrix();
             int dimension_ = this.Data.Dimension;
             var distancesPotential_ = new List<int>();
             var flowPotential_ = new List<int>();
@@ -64,7 +66,14 @@ namespace CourseWorkDO.Algorithm
                 distancesPotential_[maxPos] = -1;
                 flowPotential_[minPos] = Int32.MaxValue;
             }
-            return solution_;
+            solutionMatrix.SolutionArray = solution_;
+            int score = 0;
+            for (int i = 1; i < solution_.Length; i++)
+            {
+                score += Data.Distances[solution_[i - 1]][solution_[i]] * Data.Flows[i - 1][i];
+            }
+            solutionMatrix.Score = score;
+            return solutionMatrix;
         }
 
         public override int GetSwapCounter()

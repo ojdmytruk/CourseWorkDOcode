@@ -3,18 +3,20 @@
     ViewBag.Title = "DataUser";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<body>
+    <div class="card m-5">
+        <h3 class="card-header text-center">Введення задачі вручну</h3>
+        <div class="card-body">
+            <form class="p-a-1" method="post">
+                <div class="form-group">
+                    <label for="Dimension"> Розмірність матриць: </label>
+                    @Html.TextBoxFor(m => m.Dimension)
+                </div>
+                <div class="text-center">
+                    <input type="submit" value="Створити матриці для заповнення" />
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
 
-<div class="card m-5">
-    <h3 class="card-header text-center">Введення задачі вручну</h3>
-    <div class="card-body">
-        <form class="p-a-1" method="post">
-            <div class="form-group">
-                <label for="Dimension"> Розмірність матриць: </label>
-                @Html.TextBoxFor(m => m.Dimension)
-            </div>
-            <div class="text-center">
-                <input type="submit" value="Створити матриці для заповнення" />
-            </div>
-        </form>     
-     </div>
-</div>
