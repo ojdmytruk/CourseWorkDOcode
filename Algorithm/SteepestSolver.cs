@@ -3,22 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CourseWorkDO.Models;
+using System.Diagnostics;
 
 namespace CourseWorkDO.Algorithm
 {
     public class SteepestSolver : QapSolver
     {
+        AnaliticsContext db = new AnaliticsContext();
         public SteepestSolver(DataMatrix data) : base(data)
         {
         }
 
         public override SolutionMatrix/*[]*/ GetSolution(/*int score*/)
         {
+            Stopwatch stopwatch = new Stopwatch();
             SolutionMatrix solution = new SolutionMatrix
             {
                 Dimension = Data.Distances.Length,
                 Solution = this.GetList(this.GetRandomInitSolution())
             };
+
+            stopwatch.Start();
+
             FirstSolution = solution.Solution.ToArray();
             Delta benchmark = new Delta(Data, solution);
             CheckedElems = 0;
@@ -36,6 +42,14 @@ namespace CourseWorkDO.Algorithm
             {
                 score += Data.Distances[solution.Solution.ToArray()[i - 1]][solution.Solution.ToArray()[i]] * Data.Flows[i - 1][i];
             }
+
+            stopwatch.Stop();
+
+            var analitics = new Analitics();
+            analitics.Dimenssion = solution.Dimension;
+            analitics.WorkTime = stopwatch.ElapsedMilliseconds;
+            db.AnaliticsTable.Add(analitics);
+
             solution.Score = score;
             solution.SolutionArray = benchmark.ActualBestSolution.Solution.ToArray();
             return solution;

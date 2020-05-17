@@ -19,16 +19,14 @@ namespace CourseWorkDO.Controllers
             return View(dataMatrix);
         }
 
-        [HttpPost]
-        public ActionResult DataFile(DataMatrix dataMatrix)
-        {
-            DataMatrix matrix = new DataMatrix()
-            { Dimension = dataMatrix.Dimension };
+        //[HttpPost]
+        //public ActionResult DataFile(DataMatrix dataMatrix)
+        //{
+        //    DataMatrix matrix = new DataMatrix()
+        //    { Dimension = dataMatrix.Dimension };
 
-            return RedirectToAction("MatrixFile", matrix);
-
-
-        }
+        //    return RedirectToAction("MatrixFile", matrix);
+        //}
 
         [HttpGet]
         public ActionResult MatrixFile(DataMatrix problem)
@@ -84,28 +82,37 @@ namespace CourseWorkDO.Controllers
                 return View(problem);
         }
 
-        //[HttpPost("FileUpload")]
-        //public async Task<IActionResult> Index(List<IFormFile> files)
-        //{
-        //    long size = files.Sum(f => f.Length);
+        [HttpPost/*("FileUpload")*/]
+        public async Task<IActionResult> DataFile(List<IFormFile> files)
+        {
+            long size = files.Sum(f => f.Length);
 
-        //    var filePaths = new List<string>();
-        //    foreach (var formFile in files)
-        //    {
-        //        if (formFile.Length > 0)
-        //        {
-        //            var filePath = Path.GetTempFileName(); 
-        //            filePaths.Add(filePath);
+            var filePaths = new List<string>();
+            foreach (var formFile in files)
+            {
+                if (formFile.Length > 0)
+                {
+                    var filePath = Path.GetTempFileName();
+                    filePaths.Add(filePath);
 
-        //            using (var stream = new FileStream(filePath, FileMode.Create))
-        //            {
-        //                await formFile.CopyToAsync(stream);
-        //            }
-        //        }
-        //    }
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await formFile.CopyToAsync(stream);
+                    }
+                }
+            }
+            var data = new DataMatrix();
+            var dataReader = new DataReader();
+            data = dataReader.ReadData(filePaths.ToString().Trim());
+            var problem = new DataMatrix()
+            {
+                Dimension = data.Dimension,
+                Distances = data.Distances,
+                Flows = data.Flows
+            };
 
-        //    return Ok(new { count = files.Count, size, filePaths });
-        //}
+            return RedirectToAction("MatrixFile", problem);
+        }
 
         [HttpGet]
         public ActionResult GreedySolutionFile(SolutionMatrix solution)

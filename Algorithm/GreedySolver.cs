@@ -4,21 +4,25 @@ using System.Linq;
 using System.Threading.Tasks;
 using CourseWorkDO.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace CourseWorkDO.Algorithm
 {
     public class GreedySolver : QapSolver
     {
+        AnaliticsContext db = new AnaliticsContext();
         public GreedySolver(DataMatrix data) : base(data)
         {
         }
 
         public override SolutionMatrix GetSolution()
         {
+            Stopwatch stopwatch = new Stopwatch();
             var solutionMatrix = new SolutionMatrix();
             int dimension_ = this.Data.Dimension;
             var distancesPotential_ = new List<int>();
             var flowPotential_ = new List<int>();
+            stopwatch.Start();
 
             for (int i = 0; i < dimension_; ++i)
             {
@@ -73,6 +77,11 @@ namespace CourseWorkDO.Algorithm
                 score += Data.Distances[solution_[i - 1]][solution_[i]] * Data.Flows[i - 1][i];
             }
             solutionMatrix.Score = score;
+            stopwatch.Stop();
+            var analitics = new Analitics();
+            analitics.Dimenssion = solutionMatrix.Dimension;
+            analitics.WorkTime = stopwatch.ElapsedMilliseconds;
+            db.AnaliticsTable.Add(analitics);
             return solutionMatrix;
         }
 

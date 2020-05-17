@@ -6,13 +6,14 @@ using CourseWorkDO.Models;
 using CourseWorkDO.Algorithm;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 
 namespace CourseWorkDO.Controllers
 {
     public class UserProblemController : Controller
     {
-
+        
         [HttpGet]
         public ActionResult DataUser()
         {
@@ -27,8 +28,6 @@ namespace CourseWorkDO.Controllers
             { Dimension = dataMatrix.Dimension };
 
             return RedirectToAction("MatrixUser", matrix);
-
-
         }
 
         [HttpGet]
@@ -79,25 +78,18 @@ namespace CourseWorkDO.Controllers
             }
             else
                 return View(problem);
-
-
         }
-
 
         [HttpGet]
         public ActionResult GreedySolutionUser(SolutionMatrix solution)
         {
-
             return View(solution);
-
         }
 
         [HttpGet]
         public ActionResult SteepestSolutionUser(SolutionMatrix solution)
         {
-
             return View(solution);
-
         }
 
     }

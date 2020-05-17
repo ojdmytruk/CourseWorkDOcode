@@ -9,7 +9,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using CourseWorkDO.Models;
+using System.Data.Entity;
 using Microsoft.EntityFrameworkCore;
+//using Microsoft.EntityFrameworkCore;
 
 namespace CourseWorkDO
 {
@@ -26,7 +28,7 @@ namespace CourseWorkDO
         public void ConfigureServices(IServiceCollection services)
         {
             string connection = Configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContext<AnaliticsContext>(options => options.UseSqlServer(connection));
+            //services.AddDbContext<AnaliticsContext>(options => options.UseSqlServer(connection));
             services.AddControllersWithViews();
 
         }
