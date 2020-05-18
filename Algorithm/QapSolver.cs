@@ -13,7 +13,7 @@ namespace CourseWorkDO.Algorithm
 
         public RandomGenerator Rnd { get; set; } = new RandomGenerator();
 
-        public BetterSolutiou SolutionBenchmark { get; set; } = new BetterSolutiou();
+        public BetterSolution SolutionBenchmark { get; set; } = new BetterSolution();
 
         public int CheckedElems { get; set; }
 

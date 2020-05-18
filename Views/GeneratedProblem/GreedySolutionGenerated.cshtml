@@ -4,46 +4,49 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <body>
-    <h3>Жадібний розв'язок задачі</h3>
-<div class="card-body">
-    <form class="p-a-1" action="/UserProblem/GreedySolutionGenerated" method="post">
-        <div class="form-group">
-            @using (Html.BeginForm())
-            {
-                <table>
-                    <tr>
-                        <td>
-                            <h5>Номер місця призначення</h5>
-                        </td>
-                        @for (int column = 0; column < Model.SolutionArray.Length; column++)
-                        {
-                            <td><h5>@(column+1)</h5></td>
-                        }
-                    </tr>
-                    <tr>
-                        <td>
-                            <h5>Номер об'єкта</h5>
-                        </td>
-                        @for (int column = 0; column < Model.SolutionArray.Length; column++)
-                        {
-                            <td>@(Model.SolutionArray[column]+1)</td>
-                        }
-                    </tr>
-                    <tr>
-                        <td>
-                            <h5>Значення цільової функції</h5>
-                        </td>
-                        <td>
-                            @Model.Score
-                        </td>
-                    </tr>
+    <div class="card m-5">
+        <h2 class="card-header text-center">Жадібний розв'язок задачі</h2>
+        <div class="card-body">
+            <form class="p-a-1" action="/GeneratedProblem/GreedySolutionGenerated" method="post">
+                <div class="form-group">
+                    @using (Html.BeginForm())
+                    {
+                        <table>
+                            <tr>
+                                <td>
+                                    <h5>Номер місця призначення</h5>
+                                </td>
+                                @for (int column = 0; column < Model.SolutionArray.Length; column++)
+                                {
+                                    <td><h5>@(column+1)</h5></td>
+                                }
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5>Номер об'єкта</h5>
+                                </td>
+                                @for (int column = 0; column < Model.SolutionArray.Length; column++)
+                                {
+                                    <td>@(Model.SolutionArray[column]+1)</td>
+                                }
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h5>Значення цільової функції</h5>
+                                </td>
+                                <td>
+                                    @Model.Score
+                                </td>
+                            </tr>
 
-                </table>
-            }
+                        </table>
+                    }
+                </div>
+
+            </form>
         </div>
+    </div>
 
-    </form>
-</div>
 
 </body>
 

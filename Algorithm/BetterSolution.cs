@@ -6,11 +6,10 @@ using CourseWorkDO.Models;
 
 namespace CourseWorkDO.Algorithm
 {
-    public class BetterSolutiou
+    public class BetterSolution
     {
         public ulong RateSolution(int[] sol, DataMatrix data)
-        {
-            
+        {            
             ulong fitness = 0;
             for (int i = 0; i < sol.Count(); ++i)
             {

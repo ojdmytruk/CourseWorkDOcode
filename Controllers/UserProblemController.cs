@@ -57,7 +57,25 @@ namespace CourseWorkDO.Controllers
         [HttpPost]
         public ActionResult MatrixUser(DataMatrix problem2, [FromQuery] string myMethod = null)
         {
+            bool sym = true;
             var problem = problem2;
+            for (int i = 0; i < problem.Dimension; i++)
+                for (int j = 0; j < problem.Dimension; j++)
+                {
+                    if (problem.Distances[i][j] != problem.Distances[j][i])
+                        sym = false;
+                }
+            for (int i = 0; i < problem.Dimension; i++)
+                for (int j = 0; j < problem.Dimension; j++)
+                {
+                    if (problem.Flows[i][j] != problem.Flows[j][i])
+                        sym = false;
+                }
+            if (sym != true)
+            {
+                ViewBag.message = "Матриця повинна бути симетричною";
+                return View("Report");
+            }
 
             if (myMethod == "Greedy")
             {

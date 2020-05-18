@@ -4,59 +4,65 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <body>
-<div class="card m-5">
-    <h3 class="card-header text-center">Згенеровані матриці</h3>
-    <div class="card-body">
-        <form class="p-a-1" action="/GeneratedProblem/MatrixGenerated" method="post">
-            <div class="form-group">
-                <h3>Матриця відстаней:</h3>
-                <table>
-                    @for (int column = 0; column < Model.Distances.Length; column++)
-                    {
-                        <tr>
-                            @for (int row = 0; row < Model.Distances[column].Length; row++)
-                            {
-                                @if (column == row)
+    <div class="card m-5">
+        <h3 class="card-header text-center">Згенеровані матриці</h3>
+        <div class="card-body">
+            <p><h6>Ви можете змінити згенеровані дані, дотримуючись умов:</h6></p>
+            <p><h6>1. Головну діагональ реагувати не можна</h6></p>
+            <p><h6>2. Значення повинні бути в діапазоні [1;100]</h6></p>
+            <p><h6>3. Матриці повинні бути симетричними</h6></p>
+        </div>
+        <div class="card-body">
+            <form class="p-a-1" action="/GeneratedProblem/MatrixGenerated" method="post">
+                <div class="form-group">
+                    <h3>Матриця відстаней:</h3>
+                    <table>
+                        @for (int column = 0; column < Model.Distances.Length; column++)
+                        {
+                            <tr>
+                                @for (int row = 0; row < Model.Distances[column].Length; row++)
                                 {
-                                    <td style="width:42px">@Html.TextBoxFor(x => Model.Distances[column][row], new { style = "width:40px", @readonly = "readonly" })</td>
-                                }
-                                else
-                                {
-                                    <td style="width:42px">@Html.TextBoxFor(x => Model.Distances[column][row], new { style = "width:40px" })</td>
-                                }
+                                    @if (column == row)
+                                    {
+                                        <td style="width:42px">@Html.TextBoxFor(x => Model.Distances[column][row], new { style = "width:40px", @readonly = "readonly" })</td>
+                                    }
+                                    else
+                                    {
+                                        <td style="width:42px">@Html.TextBoxFor(x => Model.Distances[column][row], new { style = "width:40px" })</td>
+                                    }
 
-                            }
-                        </tr>
-                    }
-                </table>
-                <h3>Матриця потоків:</h3>
-                <table>
-                    @for (int column = 0; column < Model.Flows.Length; column++)
-                    {
-                        <tr>
-                            @for (int row = 0; row < Model.Flows[column].Length; row++)
-                            {
-                                @if (column == row)
-                                {
-                                    <td style="width:42px">@Html.TextBoxFor(x => Model.Flows[column][row], new { style = "width:40px", @readonly = "readonly" })</td>
                                 }
-                                else
+                            </tr>
+                        }
+                    </table>
+                    <h3>Матриця потоків:</h3>
+                    <table>
+                        @for (int column = 0; column < Model.Flows.Length; column++)
+                        {
+                            <tr>
+                                @for (int row = 0; row < Model.Flows[column].Length; row++)
                                 {
-                                    <td style="width:42px">@Html.TextBoxFor(x => Model.Flows[column][row], new { style = "width:40px" })</td>
+                                    @if (column == row)
+                                    {
+                                        <td style="width:42px">@Html.TextBoxFor(x => Model.Flows[column][row], new { style = "width:40px", @readonly = "readonly" })</td>
+                                    }
+                                    else
+                                    {
+                                        <td style="width:42px">@Html.TextBoxFor(x => Model.Flows[column][row], new { style = "width:40px" })</td>
+                                    }
                                 }
-                            }
-                        </tr>
-                    }
-                </table>
-            </div>
-            @Html.HiddenFor(m => m.Dimension);
-            <div class="text-center">
-                <input type="submit" asp-route-myMethod="Greedy" value="Жадібний алгоритм" />
-                <input type="submit" asp-route-myMethod="Steepest" value="Метод вектора спаду" />
-            </div>
-        </form>
+                            </tr>
+                        }
+                    </table>
+                </div>
+                @Html.HiddenFor(m => m.Dimension);
+                <div class="text-center">
+                    <input type="submit" asp-route-myMethod="Greedy" value="Жадібний алгоритм" />
+                    <input type="submit" asp-route-myMethod="Steepest" value="Метод вектора спаду" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 </body>
 
 

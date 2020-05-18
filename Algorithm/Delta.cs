@@ -19,11 +19,11 @@ namespace CourseWorkDO.Algorithm
 
         public Delta(DataMatrix data, SolutionMatrix solution)
         {
-            BetterSolutiou bench = new BetterSolutiou();
+            BetterSolution betterSol = new BetterSolution();
             ActualBestSolution = solution;
             Data = data;
             SwapCounter = 0;
-            ActualBestSolution.Score = Convert.ToInt32(bench.RateSolution(solution.Solution.ToArray(), data));
+            ActualBestSolution.Score = Convert.ToInt32(betterSol.RateSolution(solution.Solution.ToArray(), data));
             CalcDeltaTable();
         }
 
@@ -69,7 +69,7 @@ namespace CourseWorkDO.Algorithm
             return ActualBestSolution.Score + DeltaTable[swapX, swapY];
         }
 
-        private void CalcDelta(int tableSize, int i, int j, int piJ, int piI)
+        private void CalculateDelta(int tableSize, int i, int j, int piJ, int piI)
         {
             int partSum = 0;
             for (int g = 0; g < tableSize; g++)
@@ -97,7 +97,7 @@ namespace CourseWorkDO.Algorithm
                 for (int j = 0; j < tableSize; j++)
                 {
                     int piJ = ActualBestSolution.Solution[j];
-                    CalcDelta(tableSize, i, j, piJ, piI);
+                    CalculateDelta(tableSize, i, j, piJ, piI);
                 }
             }
         }

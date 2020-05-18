@@ -95,8 +95,6 @@ namespace CourseWorkDO.Algorithm
             stopwatch.Stop();
             var analitics = new Analitics();
             analitics.Dimenssion = Data.Dimension;
-            //TimeSpan timeSpan = stopwatch.Elapsed;
-            //analitics.WorkTime = String.Format("{0:00}:{1:00}.{2:0000}", timeSpan.Minutes, timeSpan.Seconds, timeSpan.Milliseconds / 10);
             long ticks = stopwatch.ElapsedTicks;
             TimeSpan interval = TimeSpan.FromTicks(ticks);
             analitics.Method = "Жадібний алгоритм";

@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Web;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using System.Net.Http.Headers;
+using Microsoft.AspNetCore.Hosting;
+using System.Text;
 using CourseWorkDO.Models;
 using CourseWorkDO.Algorithm;
 
@@ -12,37 +16,67 @@ namespace CourseWorkDO.Controllers
 {
     public class FileProblemController : Controller
     {
+        private IWebHostEnvironment Environment;
+        public FileProblemController(IWebHostEnvironment _environment)
+        {
+            Environment = _environment;
+        }
+
         [HttpGet]
         public ActionResult DataFile()
         {
-            DataMatrix dataMatrix = new DataMatrix();
-            return View(dataMatrix);
+            return View();
         }
 
-        //[HttpPost]
-        //public ActionResult DataFile(DataMatrix dataMatrix)
-        //{
-        //    DataMatrix matrix = new DataMatrix()
-        //    { Dimension = dataMatrix.Dimension };
+        [HttpPost]
+        public ActionResult DataFile(IFormFile postedFile, [FromQuery] string myMethod = null)
+        {           
+            _ = this.Environment.WebRootPath;
+            _ = this.Environment.ContentRootPath;
 
-        //    return RedirectToAction("MatrixFile", matrix);
-        //}
-
-        [HttpGet]
-        public ActionResult MatrixFile(DataMatrix problem)
-        {
-            //var problem = new DataMatrix();
-            var dataReader = new DataReader();
-            var filePath = Path.GetTempFileName().Trim();
-            problem = dataReader.ReadData(filePath);
-            if (problem.Dimension != 0)
+            string path = Path.Combine(this.Environment.WebRootPath, "UploadedFiles");
+            if (!Directory.Exists(path))
             {
-                problem.Distances = new int[problem.Dimension][];
-                for (int i = 0; i < problem.Dimension; i++)
-                    problem.Distances[i] = new int[problem.Dimension];
-                problem.Flows = new int[problem.Dimension][];
-                for (int i = 0; i < problem.Dimension; i++)
-                    problem.Flows[i] = new int[problem.Dimension];
+                Directory.CreateDirectory(path);
+            }
+            string fileName = Path.GetFileName(postedFile.FileName);
+                        
+            
+            var problem = new DataMatrix();
+            using (var sr = new StreamReader(System.IO.File.OpenRead(Path.Combine(path, fileName))))
+            {
+                string data = sr.ReadToEnd();
+                var splitted = data.Split((char[])null, StringSplitOptions.RemoveEmptyEntries)
+                    .ToList()
+                    .Select(x => Convert.ToInt32(x))
+                    .ToList();
+
+                int matrixSize = splitted[0];
+                problem.Dimension = matrixSize;
+                if (problem.Dimension != 0)
+                {
+                    problem.Distances = new int[problem.Dimension][];
+                    for (int i = 0; i < problem.Dimension; i++)
+                        problem.Distances[i] = new int[problem.Dimension];
+                    problem.Flows = new int[problem.Dimension][];
+                    for (int i = 0; i < problem.Dimension; i++)
+                        problem.Flows[i] = new int[problem.Dimension];
+                }
+                var qapDataFlow = new int[matrixSize][];
+                var qapDataDistance = new int[matrixSize][];
+
+                var chunked = splitted.Skip(1).Chunk(matrixSize).ToList();
+
+                for (int i = 0; i < matrixSize; ++i)
+                {
+                    problem.Distances[i] = chunked[i].ToArray();
+                }
+
+                for (int i = matrixSize; i < 2 * matrixSize; ++i)
+                {
+                    problem.Flows[i - matrixSize] = chunked[i].ToArray();
+                }
+
             }
 
             var problemResult = new DataMatrix()
@@ -51,15 +85,6 @@ namespace CourseWorkDO.Controllers
                 Distances = problem.Distances,
                 Flows = problem.Flows
             };
-
-            return View("MatrixFile", problemResult);
-
-        }
-
-        [HttpPost]
-        public ActionResult MatrixFile(DataMatrix problem2, [FromQuery] string myMethod = null)
-        {
-            var problem = problem2;
 
             if (myMethod == "Greedy")
             {
@@ -78,41 +103,9 @@ namespace CourseWorkDO.Controllers
                 solution.Score = steepestSolver.GetSolution().Score;
                 return RedirectToAction("SteepestSolutionFile", solution);
             }
-            else
-                return View(problem);
-        }
+            else return View();
 
-        [HttpPost/*("FileUpload")*/]
-        public async Task<IActionResult> DataFile(List<IFormFile> files)
-        {
-            long size = files.Sum(f => f.Length);
-
-            var filePaths = new List<string>();
-            foreach (var formFile in files)
-            {
-                if (formFile.Length > 0)
-                {
-                    var filePath = Path.GetTempFileName();
-                    filePaths.Add(filePath);
-
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await formFile.CopyToAsync(stream);
-                    }
-                }
-            }
-            var data = new DataMatrix();
-            var dataReader = new DataReader();
-            data = dataReader.ReadData(filePaths.ToString().Trim());
-            var problem = new DataMatrix()
-            {
-                Dimension = data.Dimension,
-                Distances = data.Distances,
-                Flows = data.Flows
-            };
-
-            return RedirectToAction("MatrixFile", problem);
-        }
+        }        
 
         [HttpGet]
         public ActionResult GreedySolutionFile(SolutionMatrix solution)

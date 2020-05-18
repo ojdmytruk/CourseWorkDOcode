@@ -4,44 +4,47 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <body>
-    <h1>Розв'язок методом вектора спаду</h1>
+    <div class="card m-5">
+        <h2 class="card-header text-center">Розв'язок методом вектора спаду</h2>
 
-    <div class="card-body">
-        <form class="p-a-1" action="/FileProblem/SteepestSolutionFile" method="post">
-            <div class="form-group">
-                @using (Html.BeginForm())
-                {
+        <div class="card-body">
+            <form class="p-a-1" action="/FileProblem/SteepestSolutionFile" method="post">
+                <div class="form-group">
+                    @using (Html.BeginForm())
+                    {
                     <table>
                         <tr>
                             <td>
-                                <h1>Номер місця призначення</h1>
+                                <h5>Номер місця призначення</h5>
                             </td>
                             @for (int column = 0; column < Model.SolutionArray.Length; column++)
                             {
-                                <td><h1>@(column+1)</h1></td>
+                                <td><h5>@(column+1)</h5></td>
                             }
                         </tr>
                         <tr>
                             <td>
-                                <h1>Номер об'єкта</h1>
+                                <h5>Номер об'єкта</h5>
                             </td>
                             @for (int column = 0; column < Model.SolutionArray.Length; column++)
                             {
                                 <td>@(Model.SolutionArray[column]+1)</td>
                             }
                         </tr>
-                        <tr></tr>
                         <tr>
                             <td>
-                                <h1>Значення цільової функції</h1>
+                                <h5>Значення цільової функції</h5>
                             </td>
                             <td>
                                 @Model.Score
                             </td>
                         </tr>
+
                     </table>
-                }
-            </div>
-        </form>
+                    }
+                </div>
+            </form>
+        </div>
     </div>
+    
 </body>

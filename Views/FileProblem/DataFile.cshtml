@@ -2,19 +2,16 @@
     ViewBag.Title = "DataFile";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<br />
+<div class="card m-5">
+    <h3 class="card-header text-center">Розв`язати задачу з файлу</h3>
+    <form method="post" enctype="multipart/form-data" asp-controller="FileProblem" asp-action="DataFile">
+        <span>Оберіть файл:</span>
+            <input type="file" name="postedFile" />
+        <div class="text-center">
+            <input type="submit" asp-route-myMethod="Greedy" value="Жадібний алгоритм" />
+            <input type="submit" asp-route-myMethod="Steepest" value="Метод вектора спаду" />
+         </div>
+    </form>
+</div> 
 
-<h2>UploadFile</h2>
-
-<form method="post" enctype="multipart/form-data" asp-action="MatrixFile">
-    <div class="form-group">
-        <div class="col-md-10">
-            <p>Upload one or more files using this form:</p>
-            <input type="file" name="files" multiple />
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-10">
-            <input type="submit" value="Завантажити" />
-        </div>
-    </div>
-</form>

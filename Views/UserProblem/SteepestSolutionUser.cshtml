@@ -3,9 +3,9 @@
     ViewBag.Title = "SteepestSolutionUser";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-    <body>
-        <h3>SteepestSolutionUser</h3>
+<body>
+    <div class="card m-5">
+        <h2 class="card-header text-center">Розв'язок методом вектора спаду</h2>
 
         <div class="card-body">
             <form class="p-a-1" action="/UserProblem/SteepestSolutionUser" method="post">
@@ -19,7 +19,7 @@
                                 </td>
                                 @for (int column = 0; column < Model.SolutionArray.Length; column++)
                                 {
-                                    <td><h5>@(column+1)</h5></td>
+                                    <td><h1>@(column+1)</h1></td>
                                 }
                             </tr>
                             <tr>
@@ -44,4 +44,6 @@
                 </div>
             </form>
         </div>
-    </body>
+    </div>
+
+</body>

@@ -10,13 +10,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CourseWorkDO.Algorithm
 {
-    public class SteepestSolver : QapSolver
+    public class SteepestSolver: QapSolver
     {        
         public SteepestSolver(DataMatrix data) : base(data)
         {
         }
 
-        public override SolutionMatrix/*[]*/ GetSolution(/*int score*/)
+        public override SolutionMatrix GetSolution()
         {
             var builder = new ConfigurationBuilder();
             builder.SetBasePath(Directory.GetCurrentDirectory());
@@ -62,8 +62,6 @@ namespace CourseWorkDO.Algorithm
 
             var analitics = new Analitics();
             analitics.Dimenssion = Data.Dimension;
-            //TimeSpan timeSpan = stopwatch.Elapsed;
-            //analitics.WorkTime = String.Format("{0:00}:{1:00}.{2:00}", timeSpan.Minutes, timeSpan.Seconds, timeSpan.Milliseconds / 10);
             long ticks = stopwatch.ElapsedTicks;
             TimeSpan interval = TimeSpan.FromTicks(ticks);
             analitics.Method = "Метод вектора спаду";

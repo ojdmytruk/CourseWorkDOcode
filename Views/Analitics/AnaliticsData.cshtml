@@ -4,18 +4,24 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-    <table class="table">
-        <tr>
-            <td><h5>Розмірність</h5></td>       
-            <td><h5>Метод</h5></td>
-            <td><h5>Час роботи</h5></td>
-        </tr>
-        @foreach (var item in Model)
-        {
+<body>
+    <br />
+    <div class="card m-5">
+        <table class="table">
             <tr>
-                <td>@item.Dimenssion</td>
-                <td>@item.Method</td>
-                <td>@item.WorkTime</td>
+                <td><h5>Розмірність</h5></td>
+                <td><h5>Метод</h5></td>
+                <td><h5>Час роботи</h5></td>
             </tr>
-        }
-    </table>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Dimenssion</td>
+                    <td>@item.Method</td>
+                    <td>@item.WorkTime</td>
+                </tr>
+            }
+        </table>
+    </div>
+       
+</body>
