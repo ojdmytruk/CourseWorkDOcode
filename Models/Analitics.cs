@@ -7,7 +7,9 @@ namespace CourseWorkDO.Models
 {
     public class Analitics
     {
+        public int Id { get; set; }
         public int Dimenssion { get; set; }
-        public double WorkTime { get; set; }
+        public string Method { get; set; }
+        public string WorkTime { get; set; }
     }
 }

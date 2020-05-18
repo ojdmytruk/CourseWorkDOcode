@@ -4,6 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
 
         table {
@@ -11,12 +12,17 @@
             border-spacing: 0;
             width: 100%;
             border: 1px solid #ddd;
-            background: #20B2AA
+            background: #B0E0E6;
         }
 
-        th, td {
+        th{
             text-align: left;
             padding: 16px;
+        }
+
+       
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
         }
 
         input[type=submit]:hover {
@@ -26,27 +32,8 @@
         body {
             background: url(https://i.ibb.co/0qMZmWp/bg.jpg)
         }
-
-        form {
-            background: #ADD8E6
-        }
-
-        h4 {
-            background: #ADD8E6
-        }
-
-        h3 {
-            background: #ADD8E6
-        }
-
-        div[class="jumbotron"] {
-            background: #ADD8E6
-        }
-
-        h3[class="card-header text-center"] {
-            background: #ADD8E6
-        }
     </style>
+
 
     <environment names="Staging,Production">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -58,32 +45,23 @@
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
+
 </head>
 <body>
-    <div class="navbar navbar-inverse">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("На головну", "Index", "Home")</li>
-                </ul>
-            </div>
-        </div>
-    </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+        <button type="button" class="btn btn-light">@Html.ActionLink("Головна", "Index", "Home")</button>
+        <button type="button" class="btn btn-light">@Html.ActionLink("Переглянути статистику ефективності", "AnaliticsData", "Analitics")</button>
+        
+    </nav>
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year – Дмитрук О. Ю. , ІС-71</p>
+            <p>&copy; @DateTime.Now.Year – Дмитрук О.Ю.</p>
         </footer>
     </div>
+
     <environment names="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
@@ -94,14 +72,17 @@
                 asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
                 asp-fallback-test="window.jQuery"
                 crossorigin="anonymous"
-                integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk"></script>
+                integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
+        </script>
         <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
                 asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
                 asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
                 crossorigin="anonymous"
-                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"></script>
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+        </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>

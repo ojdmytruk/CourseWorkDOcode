@@ -5,18 +5,33 @@ using System.Threading.Tasks;
 using CourseWorkDO.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace CourseWorkDO.Algorithm
 {
     public class GreedySolver : QapSolver
-    {
-        AnaliticsContext db = new AnaliticsContext();
+    {       
         public GreedySolver(DataMatrix data) : base(data)
         {
         }
 
         public override SolutionMatrix GetSolution()
         {
+            var builder = new ConfigurationBuilder();
+            builder.SetBasePath(Directory.GetCurrentDirectory());
+            builder.AddJsonFile("appsettings.json");
+            var config = builder.Build();
+            string connectionString = config.GetConnectionString("DefaultConnection");
+
+            var optionsBuilder = new DbContextOptionsBuilder<AnaliticsContext>();
+            var options = optionsBuilder
+                .UseSqlServer(connectionString)
+                .Options;
+
+            AnaliticsContext db = new AnaliticsContext(options);
+
             Stopwatch stopwatch = new Stopwatch();
             var solutionMatrix = new SolutionMatrix();
             int dimension_ = this.Data.Dimension;
@@ -79,9 +94,15 @@ namespace CourseWorkDO.Algorithm
             solutionMatrix.Score = score;
             stopwatch.Stop();
             var analitics = new Analitics();
-            analitics.Dimenssion = solutionMatrix.Dimension;
-            analitics.WorkTime = stopwatch.ElapsedMilliseconds;
+            analitics.Dimenssion = Data.Dimension;
+            //TimeSpan timeSpan = stopwatch.Elapsed;
+            //analitics.WorkTime = String.Format("{0:00}:{1:00}.{2:0000}", timeSpan.Minutes, timeSpan.Seconds, timeSpan.Milliseconds / 10);
+            long ticks = stopwatch.ElapsedTicks;
+            TimeSpan interval = TimeSpan.FromTicks(ticks);
+            analitics.Method = "Жадібний алгоритм";
+            analitics.WorkTime = interval.ToString();
             db.AnaliticsTable.Add(analitics);
+            db.SaveChangesAsync();
             return solutionMatrix;
         }
 

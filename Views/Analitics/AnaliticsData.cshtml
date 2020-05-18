@@ -1,40 +1,21 @@
-﻿@model CourseWorkDO.Models.AnaliticsContext
+﻿@model IEnumerable<CourseWorkDO.Models.Analitics>
 @{
     ViewBag.Title = "AnaliticsData";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<body>
-    <h2>Жадібний розв'язок задачі</h2>
-    <div class="card-body">
-        <form class="p-a-1" action="/Analitics/AnaliticsData" method="post">
-            <div class="form-group">
-                @using (Html.BeginForm())
-                {
-                    <table>
-                       @foreach (var item in Model.AnaliticsTable)
-                       {
-                           <tr>
-                               <td>
-                                   <h5>Розмірність</h5>
-                               </td>
-                               <td>
-                                   @item.Dimenssion
-                               </td>
-                           </tr>
-                           <tr>
-                               <td>
-                                   <h5>Час робрти</h5>
-                               </td>
-                               <td>
-                                   @item.WorkTime
-                               </td>
-                           </tr>
-                       }
-                    </table>
-                }
-            </div>
 
-        </form>
-    </div>
-
-</body>
+    <table class="table">
+        <tr>
+            <td><h5>Розмірність</h5></td>       
+            <td><h5>Метод</h5></td>
+            <td><h5>Час роботи</h5></td>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Dimenssion</td>
+                <td>@item.Method</td>
+                <td>@item.WorkTime</td>
+            </tr>
+        }
+    </table>

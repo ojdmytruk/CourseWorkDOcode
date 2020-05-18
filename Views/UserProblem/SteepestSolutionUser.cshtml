@@ -5,7 +5,7 @@
 }
 
     <body>
-        <h1>SteepestSolutionUser</h1>
+        <h3>SteepestSolutionUser</h3>
 
         <div class="card-body">
             <form class="p-a-1" action="/UserProblem/SteepestSolutionUser" method="post">
@@ -15,26 +15,25 @@
                         <table>
                             <tr>
                                 <td>
-                                    <h1>Номер місця призначення</h1>
+                                    <h5>Номер місця призначення</h5>
                                 </td>
                                 @for (int column = 0; column < Model.SolutionArray.Length; column++)
                                 {
-                                    <td><h1>@(column+1)</h1></td>
+                                    <td><h5>@(column+1)</h5></td>
                                 }
                             </tr>
                             <tr>
                                 <td>
-                                    <h1>Номер об'єкта</h1>
+                                    <h5>Номер об'єкта</h5>
                                 </td>
                                 @for (int column = 0; column < Model.SolutionArray.Length; column++)
                                 {
                                     <td>@(Model.SolutionArray[column]+1)</td>
                                 }
                             </tr>
-                            <tr></tr>
                             <tr>
                                 <td>
-                                    <h1>Значення цільової функції</h1>
+                                    <h5>Значення цільової функції</h5>
                                 </td>
                                 <td>
                                     @Model.Score

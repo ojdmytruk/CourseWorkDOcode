@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace CourseWorkDO.Models
 {
@@ -10,16 +10,17 @@ namespace CourseWorkDO.Models
     {
         public DbSet<Analitics> AnaliticsTable { get; set; }
 
-        public AnaliticsContext()
+        //public AnaliticsContext()
+        //{
+        //    Database.SetInitializer<AnaliticsContext>(new AnaliticsDBInitializer());
+        //}
+
+
+        public AnaliticsContext(DbContextOptions<AnaliticsContext> options)
+            : base(options)
         {
-            Database.SetInitializer<AnaliticsContext>(new AnaliticsDBInitializer());
+            Database.EnsureCreated();
         }
 
-
-        //public AnaliticsContext(DbContextOptions<AnaliticsContext> options)
-        //    : base(options)
-        //{
-        //    Database.EnsureCreated();
-        //}
     }
 }
