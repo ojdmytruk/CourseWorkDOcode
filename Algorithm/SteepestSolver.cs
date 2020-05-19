@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using CourseWorkDO.Models;
 using System.Diagnostics;
 using Microsoft.Extensions.Configuration;
@@ -41,12 +38,12 @@ namespace CourseWorkDO.Algorithm
             stopwatch.Start();
 
             FirstSolution = solution.Solution.ToArray();
-            Delta benchmark = new Delta(Data, solution);
+            Delta betterSolution = new Delta(Data, solution);
             CheckedElems = 0;
             bool isLocalMinimum = false;
             while (!isLocalMinimum)
             {
-                if (!CheckBestNeighbor(benchmark))
+                if (!CheckBestNeighbor(betterSolution))
                 {
                     isLocalMinimum = true;
                 }
@@ -70,7 +67,7 @@ namespace CourseWorkDO.Algorithm
             db.SaveChangesAsync();
 
             solution.Score = score;
-            solution.SolutionArray = benchmark.ActualBestSolution.Solution.ToArray();
+            solution.SolutionArray = betterSolution.ActualBestSolution.Solution.ToArray();
             return solution;
         }
 
@@ -79,17 +76,17 @@ namespace CourseWorkDO.Algorithm
             throw new NotImplementedException();
         }
 
-        private bool CheckBestNeighbor(Delta benchmark)
+        private bool CheckBestNeighbor(Delta betterSolution)
         {
             int bestI = -1;
             int bestJ = -1;
-            int bestScore = benchmark.ActualBestSolution.Score;
+            int bestScore = betterSolution.ActualBestSolution.Score;
 
-            for (int i = 0; i < benchmark.ActualBestSolution.Dimension - 1; i++)
+            for (int i = 0; i < betterSolution.ActualBestSolution.Dimension - 1; i++)
             {
-                for (int j = i + 1; j < benchmark.ActualBestSolution.Dimension; j++)
+                for (int j = i + 1; j < betterSolution.ActualBestSolution.Dimension; j++)
                 {
-                    int neighborScore = benchmark.RateSolutionChange(i, j);
+                    int neighborScore = betterSolution.RateSolutionChange(i, j);
                     if (neighborScore < bestScore)
                     {
                         bestScore = neighborScore;
@@ -105,7 +102,7 @@ namespace CourseWorkDO.Algorithm
             }
             else
             {
-                benchmark.ChangeSolution(bestI, bestJ);
+                betterSolution.ChangeSolution(bestI, bestJ);
                 return true;
             }
             

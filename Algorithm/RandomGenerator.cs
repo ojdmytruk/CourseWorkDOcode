@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Text;
 namespace CourseWorkDO.Algorithm
 {
     public class RandomGenerator
@@ -20,11 +16,5 @@ namespace CourseWorkDO.Algorithm
                 toShuffle[j] = temp;
             }
         }
-
-        public T RandomElement<T>(IList<T> elems)
-        {
-            return elems[Rnd.Next(0, elems.Count)];
-        }
-
     }
 }

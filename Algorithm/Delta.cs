@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading;
 using CourseWorkDO.Models;
 
 namespace CourseWorkDO.Algorithm
@@ -47,7 +44,7 @@ namespace CourseWorkDO.Algorithm
                 for (int j = 0; j < tableSize; j++)
                 {
                     int piJ = ActualBestSolution.Solution[j];
-                    CalcDelta(tableSize, i, j, piJ, piI);
+                    CalculateDelta(tableSize, i, j, piJ, piI);
                 }
             }
         }

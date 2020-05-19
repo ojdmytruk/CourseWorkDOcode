@@ -10,12 +10,6 @@ namespace CourseWorkDO.Models
     {
         public DbSet<Analitics> AnaliticsTable { get; set; }
 
-        //public AnaliticsContext()
-        //{
-        //    Database.SetInitializer<AnaliticsContext>(new AnaliticsDBInitializer());
-        //}
-
-
         public AnaliticsContext(DbContextOptions<AnaliticsContext> options)
             : base(options)
         {
