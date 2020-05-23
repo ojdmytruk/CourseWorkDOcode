@@ -25,7 +25,7 @@ namespace CourseWorkDO.Controllers
 
 
         }
-
+        
         [HttpGet]
         public ActionResult MatrixGenerated(DataMatrix problem)
         {
@@ -102,7 +102,7 @@ namespace CourseWorkDO.Controllers
             if (sym != true)
             {
                 ViewBag.message = "Матриця повинна бути симетричною";
-                return View("Report");
+                return RedirectToAction("Report");
             }
 
             if (myMethod == "Greedy")
@@ -140,6 +140,10 @@ namespace CourseWorkDO.Controllers
             return View(solution);
         }
 
+        public ActionResult Report()
+        {
+            return View();
+        }
 
     }
 }
