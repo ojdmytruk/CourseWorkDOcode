@@ -97,6 +97,7 @@ namespace CourseWorkDO.Algorithm
             TimeSpan interval = TimeSpan.FromTicks(ticks);
             analitics.Method = "Жадібний алгоритм";
             analitics.WorkTime = interval.ToString();
+            analitics.Score = score;
             db.AnaliticsTable.Add(analitics);
             db.SaveChangesAsync();
             return solutionMatrix;

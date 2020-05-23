@@ -11,5 +11,6 @@ namespace CourseWorkDO.Models
         public int Dimenssion { get; set; }
         public string Method { get; set; }
         public string WorkTime { get; set; }
+        public int Score { get; set; }
     }
 }

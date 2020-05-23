@@ -12,6 +12,7 @@
                 <td><h5>Розмірність</h5></td>
                 <td><h5>Метод</h5></td>
                 <td><h5>Час роботи</h5></td>
+                <td><h5>Значення ЦФ</h5></td>
             </tr>
             @foreach (var item in Model)
             {
@@ -19,6 +20,7 @@
                     <td>@item.Dimenssion</td>
                     <td>@item.Method</td>
                     <td>@item.WorkTime</td>
+                    <td>@item.Score</td>
                 </tr>
             }
         </table>

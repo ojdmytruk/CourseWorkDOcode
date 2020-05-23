@@ -101,7 +101,7 @@ namespace CourseWorkDO.Controllers
                 }
             if (sym != true)
             {
-                ViewBag.message = "Матриця повинна бути симетричною";
+                
                 return RedirectToAction("Report");
             }
 
@@ -142,6 +142,7 @@ namespace CourseWorkDO.Controllers
 
         public ActionResult Report()
         {
+            ViewBag.message = "Матриці повинні бути симетричними";
             return View();
         }
 
